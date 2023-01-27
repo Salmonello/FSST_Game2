@@ -2,12 +2,15 @@ import pygame
 from load_image import *
 from events import *
 import random
+from network import *
 
 kaktusx=[random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716)]
 kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610)]
 
 cloudsx= [random.randint(100, 500),random.randint(200, 900),random.randint(100, 900),random.randint(200, 900)]
 cloudsy= [random.randint(50, 100),random.randint(100, 200),random.randint(50, 100),random.randint(100, 200)]
+
+other_player = Entity(0,0,0,0,0,0,0)
 
 def set_other_player(player):
     global other_player
@@ -38,7 +41,7 @@ def draw_win():
     pygame.draw.rect(WINDOW,[255,255,80],ground_RECT)
 
     #drawing bullet
-    pygame.draw.rect(WINDOW,"black",[bullet.x, bullet.y, bullet.width, bullet.height])
+    pygame.draw.rect(WINDOW,(0,0,0),[bullet.x, bullet.y, bullet.width, bullet.height])
     
     #draw other player
     if other_player.is_RUN_LEFT and not other_player.is_RUN_RIGHT:

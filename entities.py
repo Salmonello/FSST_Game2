@@ -1,7 +1,7 @@
 import pygame
 
 class Entity:
-    def __init__(self, X_POS, Y_POS, WIDTH, HEIGHT, X_VEL, Y_VEL, JUMP_POW):
+    def __init__(self, X_POS:int, Y_POS, WIDTH, HEIGHT, X_VEL, Y_VEL, JUMP_POW):
         self.X = X_POS
         self.Y = Y_POS
         self.WIDTH = WIDTH

@@ -9,13 +9,14 @@ ACC = 0.5
 GROUND_HEIGHT = HEIGHT - 100
 cactus_RECT = pygame.Rect(640, 475, 80, 160)
 ground_RECT = pygame.Rect(0, GROUND_HEIGHT, WIDTH, HEIGHT - GROUND_HEIGHT)
-shot_sound= mixer.Sound('Audio/shot.mp3')
-shot_sound.set_volume(0.05)
-hitmarker_sound= mixer.Sound('Audio/hitmarker.mp3')
-hitmarker_sound.set_volume(0.05)
+shot_sound = mixer.music.load('Audio/shot.mp3')
+mixer.music.play()
+#shot_sound.set_volume(0.05)
+hitmarker_sound = mixer.music.load('Audio/hitmarker.mp3')
+#hitmarker_sound.set_volume(0.05)
 
-step_sound= mixer.Sound('Audio/steps.mp3')
-step_sound.play(-1)
+#step_sound= mixer.Sound('Audio/steps.mp3')
+#step_sound.play(-1)
 
 
 def player_movement(keys_pressed):
