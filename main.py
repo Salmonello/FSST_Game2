@@ -1,7 +1,7 @@
 import pygame
 from events import *
 from draw_window import *
-from handle_server import *
+import handle_server
 import threading
 
 pygame.mixer.init()
@@ -14,8 +14,12 @@ clock = pygame.time.Clock()
 
 def main():
     run = True
-    thread = threading.Thread(target=recif)
-    thread.start()
+    thread = threading.Thread(target=handle_server.recif)
+    try:
+        thread.start()
+    except ConnectionRefusedError:
+        print("connection refused")
+        input("")
     while run:
         clock.tick(FPS)
         keys_pressed = pygame.key.get_pressed()
@@ -31,7 +35,7 @@ def main():
         shoot_right(keys_pressed)
         shoot_left(keys_pressed)
 
-        send_player()
+        handle_server.send_player()
 
     pygame.quit()
 

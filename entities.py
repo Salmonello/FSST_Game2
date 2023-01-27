@@ -22,7 +22,6 @@ class Entity:
 
 player = Entity(20, 20, 100, 200, 8, 0, 14)
 
-
 class Projectile:
     def __init__(self, x, y, width, height, vel):
         self.x = x
@@ -34,4 +33,7 @@ class Projectile:
         self.is_shoot_R = False
         self.is_shoot_L = False
 
+bullets = []
+
 bullet = Projectile(-10, -10, 8, 8, 20)
+print(bullet)
