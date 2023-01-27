@@ -4,6 +4,7 @@ from draw_window import *
 from camera import *
 
 pygame.init()
+#tst
 
 
 pygame.display.set_caption("FSST Game")
