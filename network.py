@@ -1,6 +1,6 @@
 import socket
 
-HEADER = 600
+HEADER = 20
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNET_MASSAGE = "bye"
@@ -17,7 +17,7 @@ def send(msg:bytes):
         message += msg
         client.send(message)
 
-def recif() -> bytes:
+def recieve() -> bytes:
     msg_length = client.recv(HEADER).decode(FORMAT)
     msg = client.recv(int(msg_length))
     return msg
