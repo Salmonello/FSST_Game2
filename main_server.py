@@ -24,7 +24,8 @@ def start_server():
         clients.append(conn)
 
 #Handls a client connection and calls the msg_client.handl
-def handle_client(conn:socket.socket, add:tuple):
+def handle_client(conn:socket.socket, addr:tuple):
+    print(conn)
     connected = True
     try:
         print(f"[ACTIVE CONNECTION] {threading.active_count() -1 }\n")
