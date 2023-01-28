@@ -9,8 +9,6 @@ ACC = 0.5
 GROUND_HEIGHT = HEIGHT - 100
 cactus_RECT = pygame.Rect(640, 475, 80, 160)
 ground_RECT = pygame.Rect(0, GROUND_HEIGHT, WIDTH, HEIGHT - GROUND_HEIGHT)
-shot_sound = mixer.music.load('Audio/shot.mp3')
-mixer.music.play()
 #shot_sound.set_volume(0.05)
 hitmarker_sound = mixer.music.load('Audio/hitmarker.mp3')
 #hitmarker_sound.set_volume(0.05)
@@ -71,12 +69,14 @@ def shoot_right(keys_pressed):
         bullet.is_shoot_R = True
         bullet.x = player.X + player.WIDTH / 2
         bullet.y = player.Y + player.HEIGHT / 2
-        shot_sound.play()
+        mixer.music.load('Audio/shot.mp3')
+        mixer.music.play()
     if bullet.is_shoot_R:
         bullet.x += bullet.vel
         if (bullet.x >= 620 and bullet.y>=475) and not bullet.x >= 700 and bullet.y>=475:
             bullet.is_shoot_R = False
-            hitmarker_sound.play()
+            mixer.music.load('Audio/hitmarker.mp3')
+            mixer.music.play()
 
         if bullet.x > WIDTH:
             bullet.is_shoot_R = False
@@ -87,12 +87,14 @@ def shoot_left(keys_pressed):
         bullet.is_shoot_L = True
         bullet.x = player.X + player.WIDTH / 2
         bullet.y = player.Y + player.HEIGHT / 2
-        shot_sound.play()
+        mixer.music.load('Audio/shot.mp3')
+        mixer.music.play()
     if bullet.is_shoot_L:
         bullet.x -= bullet.vel
         if (bullet.x <= 700 and bullet.y>=475) and not bullet.x <= 620 and bullet.y>=475:
             bullet.is_shoot_L = False
-            hitmarker_sound.play()
+            mixer.music.load('Audio/hitmarker.mp3')
+            mixer.music.play()
 
         if bullet.x < -10:
             bullet.is_shoot_L = False

@@ -4,7 +4,7 @@ HEADER = 600
 PORT = 5050
 FORMAT = 'utf-8'
 DISCONNET_MASSAGE = "bye"
-SERVER = "192.168.187.233"
+SERVER = "192.168.56.1"
 ADDR = (SERVER, PORT)
 
 client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
