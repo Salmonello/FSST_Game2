@@ -13,6 +13,8 @@ clock = pygame.time.Clock()
 
 
 def main():
+    tick = 0
+    win = False
     run = True
     thread = threading.Thread(target=handle_server.recif)
     try:
@@ -21,6 +23,7 @@ def main():
         print("connection refused")
         input("")
     while run:
+        tick+=1
         clock.tick(FPS)
         keys_pressed = pygame.key.get_pressed()
 
@@ -31,13 +34,21 @@ def main():
         collision_detection()
         player_movement(keys_pressed)
         jumping_gravity(keys_pressed)
-        draw_win()
-        shoot_right(keys_pressed)
-        shoot_left(keys_pressed)
-        checkbullet_hit(other_player, bullet)
-        checkbullet_gothit(player, other_bullets)
+        if not win:
+            draw_win()
+        else:
+            WinWindow()
+        shoot_right(keys_pressed,tick)
+        shoot_left(keys_pressed,tick)
+        checkbullet_hit(bullet)
+        if checkwin():
+            win= True
+
 
         handle_server.send_player()
+
+
+
 
     pygame.quit()
 

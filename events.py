@@ -6,6 +6,7 @@ from draw_window import *
 pygame.mixer.init()
 
 
+
 ACC = 0.5
 GROUND_HEIGHT = HEIGHT - 100
 cactus_RECT = pygame.Rect(640, 475, 80, 160)
@@ -19,7 +20,7 @@ mixer.music.load('Audio/backgroundmusic.mp3')
 mixer.music.set_volume(0.015)
 mixer.music.play(-1)
 
-
+pause = 0
 
 
 def player_movement(keys_pressed):
@@ -62,8 +63,10 @@ def collision_detection():
     else:
         player.is_FALL = True
 
-def shoot_right(keys_pressed):
-    if keys_pressed[pygame.K_RIGHT] and not bullet.is_shoot_R and not bullet.is_shoot_L:
+def shoot_right(keys_pressed, tick):
+    global pause
+    if keys_pressed[pygame.K_RIGHT] and pause+60<=tick and not bullet.is_shoot_R and not bullet.is_shoot_L:
+        pause = tick
         bullet.is_shoot_R = True
         bullet.x = player.X + player.WIDTH / 2 +30
         bullet.y = player.Y + player.HEIGHT / 2 -10
@@ -77,13 +80,16 @@ def shoot_right(keys_pressed):
             hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
             hitmarker.set_volume(0.025)
             hitmarker.play()
+            bullet.y = -10
 
         if bullet.x > WIDTH:
             bullet.is_shoot_R = False
 
 
-def shoot_left(keys_pressed):
-    if keys_pressed[pygame.K_LEFT] and not bullet.is_shoot_R and not bullet.is_shoot_L:
+def shoot_left(keys_pressed, tick):
+    global pause
+    if keys_pressed[pygame.K_LEFT] and pause+60<=tick and not bullet.is_shoot_R and not bullet.is_shoot_L:
+        pause = tick
         bullet.is_shoot_L = True
         bullet.x = player.X + player.WIDTH / 2 -30
         bullet.y = player.Y + player.HEIGHT / 2 -10
@@ -97,16 +103,11 @@ def shoot_left(keys_pressed):
             hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
             hitmarker.set_volume(0.025)
             hitmarker.play()
+            bullet.y = -10
 
         if bullet.x < -10:
             bullet.is_shoot_L = False
 
-def checkbullet_hit(other_player, bullet):
-    global score_eigen
-    if other_player.RECT == bullet.x and other_player.RECT == bullet.y:
-        score_eigen+=1
 
-def checkbullet_gothit(player, other_bullets):
-    global score_gegner
-    if player.RECT == other_bullets.x and player.RECT == other_bullets.y:
-        score_gegner+=1
+
+

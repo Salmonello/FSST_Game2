@@ -6,7 +6,7 @@ def recif():
             msg = network.recif()
             pickeled_entity = pickle.loads(msg)
         except:
-            print(pickeled_entity)
+            pass
         if isinstance(pickeled_entity, entities.Entity):
             draw_window.set_other_player(pickeled_entity)
         else:

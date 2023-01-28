@@ -3,9 +3,11 @@ from load_image import *
 import events
 import random
 import entities
-
+from pygame import mixer
 pygame.font.init()
+
 smallfont = pygame.font.SysFont('impact',30)
+bigfont = pygame.font.SysFont('impact',80)
 
 kaktusx=[random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716)]
 kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610)]
@@ -15,16 +17,39 @@ cloudsy= [random.randint(50, 100),random.randint(100, 200),random.randint(50, 10
 
 other_player = entities.Entity(20, 20, 100, 200, 8, 0, 14)
 other_bullets = Projectile(-10, -10, 8, 8, 20)
-score_eigen = 0
-score_gegner = 0
+
+score = 0
+
+def checkwin():
+    pygame.mixer.init()
+    global score
+    if score >= 6:
+        win = pygame.mixer.Sound("Audio/win.mp3")
+        win.play()
+        return True
+
+def WinWindow():
+    pygame.draw.rect(WINDOW, [255, 215, 0], [0, 0, 10000, 1000])
+    text_score = bigfont.render("GEWONNEN!!!", True, "black")
+    WINDOW.blit(text_score, [560, 100])
+    pygame.display.update()
 
 
-def Punkte(score_eigen,score_gegner):
-    text_eigen =smallfont.render("Eigener Score:  "+ str(score_eigen),True, "black")
-    text_gegner = smallfont.render("Gegner Score:  " + str(score_gegner), True, "black")
-    WINDOW.blit(text_eigen,[300,100])
-    WINDOW.blit(text_gegner,[900,100])
 
+
+def Punkte(score):
+    text_score =smallfont.render("Score:  "+ str(score),True, "black")
+    WINDOW.blit(text_score,[620,100])
+
+
+def checkbullet_hit(bullet):
+    global score
+    if (bullet.x >= other_player.X and bullet.y >= other_player.Y and bullet.x <= other_player.X + player.WIDTH and bullet.y <= other_player.Y + player.HEIGHT):
+        hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
+        hitmarker.set_volume(0.025)
+        hitmarker.play()
+        score+=1
+        bullet.y=2000
 
 def set_other_player(player):
     global other_player
@@ -80,7 +105,7 @@ def draw_win():
     #drawing bullet
     pygame.draw.rect(WINDOW,(0,0,0),[other_bullets.x, other_bullets.y, other_bullets.width, other_bullets.height])
 
-    Punkte(score_gegner,score_eigen)
+    Punkte(score)
     #draw other player
     if other_player.is_RUN_LEFT and not other_player.is_RUN_RIGHT:
         other_player.ANIM_COUNT += 0.2
@@ -97,7 +122,7 @@ def draw_win():
     elif other_player.is_FALL:
         WINDOW.blit(PLAYER_IMG.FALLING, [other_player.X, other_player.Y])
 
-    elif other_player.X >= 640:
+    elif other_player.X >= player.X:
         other_player.ANIM_COUNT += 0.2
         if other_player.ANIM_COUNT + 0.2 > 8:
             other_player.ANIM_COUNT = 0
@@ -125,7 +150,7 @@ def draw_win():
     elif player.is_FALL:
         WINDOW.blit(PLAYER_IMG.FALLING, [player.X, player.Y])
 
-    elif player.X >= 640:
+    elif player.X >= other_player.X:
         player.ANIM_COUNT += 0.2
         if player.ANIM_COUNT + 0.2 > 8:
             player.ANIM_COUNT = 0
