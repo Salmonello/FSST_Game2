@@ -60,8 +60,8 @@ def collision_detection():
 def shoot_right(keys_pressed):
     if keys_pressed[pygame.K_RIGHT] and not bullet.is_shoot_R and not bullet.is_shoot_L:
         bullet.is_shoot_R = True
-        bullet.x = player.X + player.WIDTH / 2
-        bullet.y = player.Y + player.HEIGHT / 2
+        bullet.x = player.X + player.WIDTH / 2 +30
+        bullet.y = player.Y + player.HEIGHT / 2 -10
         mixer.music.load('Audio/shot.mp3')
         mixer.music.play()
     if bullet.is_shoot_R:
@@ -78,8 +78,8 @@ def shoot_right(keys_pressed):
 def shoot_left(keys_pressed):
     if keys_pressed[pygame.K_LEFT] and not bullet.is_shoot_R and not bullet.is_shoot_L:
         bullet.is_shoot_L = True
-        bullet.x = player.X + player.WIDTH / 2
-        bullet.y = player.Y + player.HEIGHT / 2
+        bullet.x = player.X + player.WIDTH / 2 -30
+        bullet.y = player.Y + player.HEIGHT / 2 -10
         mixer.music.load('Audio/shot.mp3')
         mixer.music.play()
     if bullet.is_shoot_L:
