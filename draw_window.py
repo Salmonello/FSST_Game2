@@ -1,6 +1,6 @@
 import pygame
 from load_image import *
-from events import *
+import events
 import random
 import entities
 
@@ -58,7 +58,7 @@ def draw_win():
     pygame.draw.rect(WINDOW,[240,240,240],[cloudsx[3], cloudsy[3], 200, 80])
 
     #Ground
-    ground_RECT = pygame.Rect(0, GROUND_HEIGHT, WIDTH, HEIGHT - GROUND_HEIGHT)
+    ground_RECT = pygame.Rect(0, events.GROUND_HEIGHT, WIDTH, HEIGHT - events.GROUND_HEIGHT)
     pygame.draw.rect(WINDOW,[255,255,80],ground_RECT)
 
     #drawing bullet

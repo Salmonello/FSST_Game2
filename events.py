@@ -94,5 +94,5 @@ def shoot_left(keys_pressed):
             bullet.is_shoot_L = False
 
 def bullet_hit(bullet):
-    if player.RECT == bullet.RECT:
+    #if player.RECT == bullet.RECT:
         pass #Macht matzee so gut
