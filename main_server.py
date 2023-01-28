@@ -1,9 +1,10 @@
 import socket, threading
 
-HEADER = 20
+HEADER = 600
 PORT = 5050
 SERVER = socket.gethostbyname("0.0.0.0")
 ADDR = (SERVER, PORT)
+FORMAT = 'utf-8'
 print("SERVER: ", SERVER)
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -16,21 +17,18 @@ def start_server():
     server.listen()
     print(f"[LISTENING] Server is listening on {SERVER}")
     while True:
-        #Waits till client connects
         conn, addr = server.accept()
-        #Starts thread to speak to client
+
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
         clients.append(conn)
 
-#Handls all messages and redirects them to the other clients
+#Handls a client connection and calls the msg_client.handl
 def handle_client(conn:socket.socket, addr:tuple):
     connected = True
     try:
         print(f"[ACTIVE CONNECTION] {threading.active_count() -1 }\n")
-        #Server connected with client
         while connected:
-            #sends the data from the client to the other client
             msg = conn.recv(HEADER)
             for client in clients:
                 if client != conn:

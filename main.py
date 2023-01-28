@@ -16,7 +16,7 @@ def main():
     tick = 0                            #tick auf null setzen
     win = False                         #wird bei sieg auf True gesetzt
     run = True                          #solang fenster läuft true
-    thread = threading.Thread(target=handle_server.recife)
+    thread = threading.Thread(target=handle_server.recif)
     thread.start()                                                      #server entpfängt Antwort von client
     while run:
         tick+=1                                                         #ticks erhöht sich mit verlauf solang spiel läuft

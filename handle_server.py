@@ -1,9 +1,9 @@
 import network, pickle, entities, draw_window
             
-def recieve():
+def recif():
     while True:
         try:
-            msg = network.recieve()
+            msg = network.recif()
             pickeled_entity = pickle.loads(msg)
         except:
             pass
