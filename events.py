@@ -10,11 +10,7 @@ ACC = 0.5
 GROUND_HEIGHT = HEIGHT - 100
 cactus_RECT = pygame.Rect(640, 475, 80, 160)
 ground_RECT = pygame.Rect(0, GROUND_HEIGHT, WIDTH, HEIGHT - GROUND_HEIGHT)
-#shot_sound.set_volume(0.05)
-hitmarker_sound = mixer.music.load('Audio/hitmarker.mp3')
 
-#step_sound= mixer.Sound('Audio/steps.mp3')
-#step_sound.play(-1)
 entry= pygame.mixer.Sound("Audio/entry.mp3")
 entry.set_volume(0.07)
 entry.play()
@@ -22,15 +18,9 @@ entry.play()
 mixer.music.load('Audio/backgroundmusic.mp3')
 mixer.music.set_volume(0.015)
 mixer.music.play(-1)
-"""
-mixer.music.load('Audio/steps.mp3')
-mixer.music.set_volume(0.5)
-mixer.music.play(-1)
-"""
-shot= pygame.mixer.Sound("Audio/shot.mp3")
-shot.set_volume(0.025)
-hitmarker= pygame.mixer.Sound("Audio/hitmarker.mp3")
-hitmarker.set_volume(0.025)
+
+
+
 
 def player_movement(keys_pressed):
     player_RECT = pygame.Rect(player.X, player.Y, player.WIDTH, player.HEIGHT)
@@ -77,11 +67,15 @@ def shoot_right(keys_pressed):
         bullet.is_shoot_R = True
         bullet.x = player.X + player.WIDTH / 2 +30
         bullet.y = player.Y + player.HEIGHT / 2 -10
+        shot = pygame.mixer.Sound("Audio/shot.mp3")
+        shot.set_volume(0.025)
         shot.play()
     if bullet.is_shoot_R:
         bullet.x += bullet.vel
         if (bullet.x >= 650 and bullet.y>=475) and not bullet.x >= 700 and bullet.y>=475:
             bullet.is_shoot_R = False
+            hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
+            hitmarker.set_volume(0.025)
             hitmarker.play()
 
         if bullet.x > WIDTH:
@@ -93,11 +87,15 @@ def shoot_left(keys_pressed):
         bullet.is_shoot_L = True
         bullet.x = player.X + player.WIDTH / 2 -30
         bullet.y = player.Y + player.HEIGHT / 2 -10
+        shot = pygame.mixer.Sound("Audio/shot.mp3")
+        shot.set_volume(0.025)
         shot.play()
     if bullet.is_shoot_L:
         bullet.x -= bullet.vel
         if (bullet.x <= 700 and bullet.y>=475) and not bullet.x <= 620 and bullet.y>=475:
             bullet.is_shoot_L = False
+            hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
+            hitmarker.set_volume(0.025)
             hitmarker.play()
 
         if bullet.x < -10:
