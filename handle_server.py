@@ -2,8 +2,11 @@ import network, pickle, entities, draw_window
             
 def recieve():
     while True:
-        msg = network.recieve()
-        pickeled_entity = pickle.loads(msg)
+        try:
+            msg = network.recieve()
+            pickeled_entity = pickle.loads(msg)
+        except:
+            pass
         if isinstance(pickeled_entity, entities.Entity):
             draw_window.set_other_player(pickeled_entity)
         else:
