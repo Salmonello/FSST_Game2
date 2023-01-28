@@ -5,30 +5,30 @@ import random
 import entities
 from pygame import mixer
 pygame.font.init()
-
+#Schriftarten importieren
 smallfont = pygame.font.SysFont('impact',30)
 bigfont = pygame.font.SysFont('impact',80)
-
+#2 verschiedene Schriftformate erstellen
 kaktusx=[random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716)]
 kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610)]
-
+#liste für stacheln des kaktus
 cloudsx= [random.randint(100, 500),random.randint(200, 900),random.randint(100, 900),random.randint(200, 900)]
 cloudsy= [random.randint(50, 100),random.randint(100, 200),random.randint(50, 100),random.randint(100, 200)]
-
+#wolken auf zufälligen kordinaten
 other_player = entities.Entity(20, 20, 100, 200, 8, 0, 14)
 other_bullets = Projectile(-10, -10, 8, 8, 20)
-
+#gegnerspieler und seine Kugeln
 score = 0
 
-def checkwin():
+def checkwin():         #auf sieg prüfen
     pygame.mixer.init()
     global score
-    if score >= 6:
+    if score >= 10:
         win = pygame.mixer.Sound("Audio/win.mp3")
         win.play()
         return True
 
-def WinWindow():
+def WinWindow():                #Fenster das dargestellt wird bei sieg
     pygame.draw.rect(WINDOW, [255, 215, 0], [0, 0, 10000, 1000])
     text_score = bigfont.render("GEWONNEN!!!", True, "black")
     WINDOW.blit(text_score, [560, 100])
@@ -37,12 +37,12 @@ def WinWindow():
 
 
 
-def Punkte(score):
+def Punkte(score):          #zeigt score an für jeweiligen spieler
     text_score =smallfont.render("Score:  "+ str(score),True, "black")
     WINDOW.blit(text_score,[620,100])
 
 
-def checkbullet_hit(bullet):
+def checkbullet_hit(bullet):        #kontrolliert ob ein Treffer stattfindet
     global score
     if (bullet.x >= other_player.X and bullet.y >= other_player.Y and bullet.x <= other_player.X + player.WIDTH and bullet.y <= other_player.Y + player.HEIGHT):
         hitmarker = pygame.mixer.Sound("Audio/hitmarker.mp3")
@@ -51,18 +51,19 @@ def checkbullet_hit(bullet):
         score+=1
         bullet.y=2000
 
-def set_other_player(player):
+def set_other_player(player):       #gegner
     global other_player
     other_player = player
 
-def set_other_bullets(bullet):
+def set_other_bullets(bullet):          #kugel des gegners
+
     global other_bullets
     other_bullets = bullet
 
-def draw_win():
+def draw_win():                         #zeichnet Fenster
     global other_player
 
-    WINDOW.fill([120,150,255])
+    WINDOW.fill([120,150,255])              #füllt hintergrund
 
     #drawing sun
     pygame.draw.rect(WINDOW,[255,255,0],[500, 180, 50, 50])
