@@ -28,6 +28,20 @@ def draw_win():
     pygame.draw.rect(WINDOW, [0,100,0], cactus_RECT)
 
     #cactus dots
+    pygame.draw.rect(WINDOW, [0, 0, 0], [636, 480, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [638, 580, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [640, 520, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [638, 530, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [636, 500, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [720, 480, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [718, 520, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [720, 570, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [718, 510, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [719, 545, 4, 4])
+
+    pygame.draw.rect(WINDOW, [0, 0, 0], [670, 471, 4, 4])
+    pygame.draw.rect(WINDOW, [0, 0, 0], [700, 473, 4, 4])
+
     for i in range(1, 18):
         pygame.draw.rect(WINDOW, [0, 0, 0], [kaktusx[i], kaktusy[i], 4, 4])
 
@@ -60,11 +74,18 @@ def draw_win():
     elif other_player.is_FALL:
         WINDOW.blit(PLAYER_IMG.FALLING, [other_player.X, other_player.Y])
 
-    else:
+    elif other_player.X >=640:
         other_player.ANIM_COUNT += 0.2
         if other_player.ANIM_COUNT + 0.2 > 8:
             other_player.ANIM_COUNT = 0
         WINDOW.blit(PLAYER_IMG.STANDING[int(other_player.ANIM_COUNT)], [other_player.X, other_player.Y])
+
+    else:
+        other_player.ANIM_COUNT += 0.2
+        if other_player.ANIM_COUNT + 0.2 > 8:
+            other_player.ANIM_COUNT = 0
+        WINDOW.blit(PLAYER_IMG.STANDING_LEFT[int(other_player.ANIM_COUNT)], [other_player.X, other_player.Y])
+    pygame.display.update()
         
     #draw real player
     if player.is_RUN_LEFT and not player.is_RUN_RIGHT:
@@ -82,10 +103,15 @@ def draw_win():
     elif player.is_FALL:
         WINDOW.blit(PLAYER_IMG.FALLING, [player.X, player.Y])
 
-    else:
+    elif player.X >=640:
         player.ANIM_COUNT += 0.2
         if player.ANIM_COUNT + 0.2 > 8:
             player.ANIM_COUNT = 0
         WINDOW.blit(PLAYER_IMG.STANDING[int(player.ANIM_COUNT)], [player.X, player.Y])
 
+    else:
+        player.ANIM_COUNT += 0.2
+        if player.ANIM_COUNT + 0.2 > 8:
+            player.ANIM_COUNT = 0
+        WINDOW.blit(PLAYER_IMG.STANDING_LEFT[int(player.ANIM_COUNT)], [player.X, player.Y])
     pygame.display.update()

@@ -53,9 +53,6 @@ def jumping_gravity(keys_pressed):
 
 def collision_detection():
     player_RECT = pygame.Rect(player.X, player.Y, player.WIDTH, player.HEIGHT)
-    #if player_RECT.midright >= cactus_RECT.midleft and player_RECT.midleft <= cactus_RECT.midright and player_RECT.centery >= cactus_RECT.centery-100:
-    #    print("hdbsak")
-    #if bullet
 
     if player_RECT.bottom >= ground_RECT.top:
         player.is_FALL = False
