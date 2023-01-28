@@ -4,6 +4,9 @@ import events
 import random
 import entities
 
+pygame.font.init()
+smallfont = pygame.font.SysFont('impact',30)
+
 kaktusx=[random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716)]
 kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610)]
 
@@ -12,6 +15,16 @@ cloudsy= [random.randint(50, 100),random.randint(100, 200),random.randint(50, 10
 
 other_player = entities.Entity(20, 20, 100, 200, 8, 0, 14)
 other_bullets = Projectile(-10, -10, 8, 8, 20)
+score_eigen = 0
+score_gegner = 0
+
+
+def Punkte(score_eigen,score_gegner):
+    text_eigen =smallfont.render("Eigener Score:  "+ str(score_eigen),True, "black")
+    text_gegner = smallfont.render("Gegner Score:  " + str(score_gegner), True, "black")
+    WINDOW.blit(text_eigen,[300,100])
+    WINDOW.blit(text_gegner,[900,100])
+
 
 def set_other_player(player):
     global other_player
@@ -66,7 +79,8 @@ def draw_win():
 
     #drawing bullet
     pygame.draw.rect(WINDOW,(0,0,0),[other_bullets.x, other_bullets.y, other_bullets.width, other_bullets.height])
-    
+
+    Punkte(score_gegner,score_eigen)
     #draw other player
     if other_player.is_RUN_LEFT and not other_player.is_RUN_RIGHT:
         other_player.ANIM_COUNT += 0.2

@@ -34,7 +34,8 @@ def main():
         draw_win()
         shoot_right(keys_pressed)
         shoot_left(keys_pressed)
-        bullet_hit(other_bullets)
+        checkbullet_hit(other_player, bullet)
+        checkbullet_gothit(player, other_bullets)
 
         handle_server.send_player()
 
