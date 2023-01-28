@@ -2,6 +2,7 @@ import pygame
 from load_image import *
 from entities import *
 from pygame import mixer
+from draw_window import *
 pygame.mixer.init()
 
 
@@ -11,7 +12,6 @@ cactus_RECT = pygame.Rect(640, 475, 80, 160)
 ground_RECT = pygame.Rect(0, GROUND_HEIGHT, WIDTH, HEIGHT - GROUND_HEIGHT)
 #shot_sound.set_volume(0.05)
 hitmarker_sound = mixer.music.load('Audio/hitmarker.mp3')
-#hitmarker_sound.set_volume(0.05)
 
 #step_sound= mixer.Sound('Audio/steps.mp3')
 #step_sound.play(-1)
@@ -49,8 +49,6 @@ def jumping_gravity(keys_pressed):
             player.Y -= 1
             player.Y_VEL -= player.JUMP_POW
 
-
-
 def collision_detection():
     player_RECT = pygame.Rect(player.X, player.Y, player.WIDTH, player.HEIGHT)
     #if player_RECT.midright >= cactus_RECT.midleft and player_RECT.midleft <= cactus_RECT.midright and player_RECT.centery >= cactus_RECT.centery-100:
@@ -61,8 +59,6 @@ def collision_detection():
         player.is_FALL = False
     else:
         player.is_FALL = True
-
-
 
 def shoot_right(keys_pressed):
     if keys_pressed[pygame.K_RIGHT] and not bullet.is_shoot_R and not bullet.is_shoot_L:
@@ -95,9 +91,11 @@ def shoot_left(keys_pressed):
             bullet.is_shoot_L = False
             mixer.music.load('Audio/hitmarker.mp3')
             mixer.music.play()
+            mixer.music.set_volume(0.5)
 
         if bullet.x < -10:
             bullet.is_shoot_L = False
 
-
-
+def bullet_hit(bullet):
+    if player.RECT == bullet.RECT:
+        pass #Macht matzee so gut

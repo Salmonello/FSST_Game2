@@ -36,4 +36,3 @@ class Projectile:
 bullets = []
 
 bullet = Projectile(-10, -10, 8, 8, 20)
-print(bullet)

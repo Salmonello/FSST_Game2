@@ -2,6 +2,7 @@ import pygame
 from load_image import *
 from events import *
 import random
+import entities
 
 kaktusx=[random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716),random.randint(640, 716)]
 kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610),random.randint(475, 610)]
@@ -9,11 +10,16 @@ kaktusy=[random.randint(475, 610),random.randint(475, 610),random.randint(475, 6
 cloudsx= [random.randint(100, 500),random.randint(200, 900),random.randint(100, 900),random.randint(200, 900)]
 cloudsy= [random.randint(50, 100),random.randint(100, 200),random.randint(50, 100),random.randint(100, 200)]
 
-other_player = Entity(0,0,0,0,0,0,0)
+other_player = entities.Entity(20, 20, 100, 200, 8, 0, 14)
+other_bullets = Projectile(-10, -10, 8, 8, 20)
 
 def set_other_player(player):
     global other_player
     other_player = player
+
+def set_other_bullets(bullet):
+    global other_bullets
+    other_bullets = bullet
 
 def draw_win():
     global other_player
@@ -43,6 +49,9 @@ def draw_win():
 
     #drawing bullet
     pygame.draw.rect(WINDOW,(0,0,0),[bullet.x, bullet.y, bullet.width, bullet.height])
+
+    #drawing bullet
+    pygame.draw.rect(WINDOW,(0,0,0),[other_bullets.x, other_bullets.y, other_bullets.width, other_bullets.height])
     
     #draw other player
     if other_player.is_RUN_LEFT and not other_player.is_RUN_RIGHT:
